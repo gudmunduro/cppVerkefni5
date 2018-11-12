@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/FlightBooking.cpp
+FlightBooking.h
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/FlightBooking.h
+FlightBooking.h
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/FlightBooking.h
+
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/FlightBooking.h
+Functions.cpp
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/Functions.cpp
+
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/Functions.cpp
+iterator
+-
+iostream
+-
+string
+-
+sstream
+-
+map
+-
+
