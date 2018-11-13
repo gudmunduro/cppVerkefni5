@@ -24,6 +24,7 @@ void printError(int code = 0)
         case 3: cout << "Error: Invalid command" << endl; break;
         case 4: cout << "Error: Seats cannot be at more than 105% capacity" << endl; break;
         case 5: cout << "Error: Seats cannot be at below 0% capacity" << endl; break;
+        case 6: cout << "Error: Unknown error" << endl; break;
     }
     cout << "Cannot perform this operation" << endl;
 }
@@ -37,7 +38,10 @@ void processCommand(string command, string *arguments)
     if (command == "create")
     {
         if (!flightBookings->has(id))
-            flightBookings->add(id, new FlightBooking(id, stoi(arguments[1]), 0));
+        {
+            if (!flightBookings->add(id, new FlightBooking(id, stoi(arguments[1]), 0)))
+                printError(6);
+        }
         else printError(2);
     }
     if (command == "delete")

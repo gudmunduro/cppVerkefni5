@@ -32,9 +32,10 @@ struct FlightBookingElement {
 class FlightBookingList {
 private:
 
-    FlightBookingElement *first, *last;
+    FlightBookingElement *first;
     FlightBookingElement *getElement(int id);
     FlightBookingElement *getElementBefore(int id);
+    FlightBookingElement *last();
 public:
 
     FlightBookingList();
@@ -42,6 +43,7 @@ public:
     FlightBooking *get(int id);
     bool has(int id);
     void remove(int id);
+    void printAll();
 };
 
 

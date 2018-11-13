@@ -1,11 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Skilavekefni5.dir/main.cpp.obj"
-  "CMakeFiles/Skilavekefni5.dir/FlightBooking.cpp.obj"
-  "CMakeFiles/Skilavekefni5.dir/Functions.cpp.obj"
+  "CMakeFiles/Skilavekefni5.dir/main.cpp.o"
+  "CMakeFiles/Skilavekefni5.dir/FlightBooking.cpp.o"
+  "CMakeFiles/Skilavekefni5.dir/Functions.cpp.o"
   "Skilavekefni5.pdb"
-  "Skilavekefni5.exe"
-  "Skilavekefni5.exe.manifest"
-  "Skilavekefni5.lib"
+  "Skilavekefni5"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,3 +1,3 @@
-E:/Projects/Forritun/cppVerkefni5/cmake-build-debug/CMakeFiles/Skilavekefni5.dir
-E:/Projects/Forritun/cppVerkefni5/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/Projects/Forritun/cppVerkefni5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/gudmundur/Projects/Forritun/Cpp/Skilavekefni5/cmake-build-debug/CMakeFiles/Skilavekefni5.dir

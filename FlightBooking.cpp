@@ -43,66 +43,64 @@ bool FlightBooking::isAllowedReservation(int reservation)
     return ((float)reservation) / ((float)capacity) < 1.05; // Skilar true eða false eftir því hvort það sé yfir leyfilega magninu sem er 105%
 }
 
+
+
 // FlightBooking list
 
 FlightBookingList::FlightBookingList()
 {
     first = nullptr;
-    last = nullptr;
 }
 
 bool FlightBookingList::add(int id, FlightBooking *booking)
 {
-    if (!has(id)) return false;
+    /*Bætir inn í listann*/
+    if (has(id)) return false; // Ef elemt með sama id er nú þegar til hættir það við
 
-    FlightBookingElement *el = new FlightBookingElement;
-    el->id = id;
-    el->booking = booking;
+    FlightBookingElement *el = new FlightBookingElement; // Býr til nýtt element
+    el->id = id; // Setur idið á því
+    el->booking = booking; // Setur booking instance á því
 
-    if (first == nullptr)
+    if (first == nullptr) // Ef firsta er ekki til (listinn tómur
     {
-        first = el;
-        last = el;
+        first = el; // Setur það einfaldlega elementið á first breytuna
+        return true; // Skilar true sem þýðir að það hafi tekist
+    }
+    if (id < first->id) // Ef idið er minna en það á því fyrsta
+    {
+        el->next = first; // Breytir next á nýja í það sjálft
+        first = el; // Og setur síðan fyrsta í það nýja
         return true;
     }
-    if (first->id > id)
+    if (first->next == nullptr) // Ef það er bara eitt stak í listanum
     {
-        el->next = first;
-        first = el;
+        first->next = el; // Setur það next á fyrsta
         return true;
     }
-    if (last->id < id)
+    if (last()->id < id) // Ef idið á nýja er undir því sem er aftast
     {
-        last->next = el;
-        last = el;
+        last()->next = el; // Setur það bara next á síðasta
         return true;
     }
-    FlightBookingElement* elBefore = getElementBefore(id);
-    if (elBefore == nullptr) return false;
-    el->next = elBefore->next;
-    elBefore->next = el;
-    /*FlightBookingElement *el = new FlightBookingElement;
-    el->id = id;
-    el->booking = booking;
-    if (first == nullptr)
-    {
-        first = el;
-    }
-    if (last != nullptr)
-    {
-        last->next = el;
-    }
-    last = el;*/
+
+    FlightBookingElement* elBefore = getElementBefore(id); // Finnur það sem er fyrir neðan idið (á staðnum sem á að setja inn í)
+    if (elBefore == nullptr) return false; // Ef það kemur ekkert út úr því er hætt við
+
+    el->next = elBefore->next; // Setur next á því nýja í next á því sem það fann fyrir neðan
+    elBefore->next = el; // Og next á því fyrir neðan í það nýja
+    return true; // Skilar síðan true því það hefur tekist að setja inn í
 }
 
 FlightBooking* FlightBookingList::get(int id)
 {
+    /* Skilar instance af FlightBooking fyrir id */
     if (has(id)) return getElement(id)->booking;
     return nullptr;
 }
 
 FlightBookingElement *FlightBookingList::getElement(int id)
 {
+    /* Skilar instance af FlightBookingElement fyrir id */
     FlightBookingElement *current = first;
     while (current != nullptr)
     {
@@ -118,7 +116,7 @@ FlightBookingElement *FlightBookingList::getElementBefore(int id)
     FlightBookingElement *last = nullptr;
     while (current != nullptr)
     {
-        if (current->id == id) return last;
+        if (current->id > id) return last;
         last = current;
         current = current->next;
     }
@@ -130,6 +128,26 @@ bool FlightBookingList::has(int id)
     return getElement(id) != nullptr;
 }
 
+FlightBookingElement *FlightBookingList::last()
+{
+    FlightBookingElement *current = first;
+    while (current != nullptr)
+    {
+        if (current->next == nullptr) return current;
+        current = current->next;
+    }
+    return nullptr;
+}
+
+void FlightBookingList::printAll() {
+    FlightBookingElement *current = first;
+    while (current != nullptr)
+    {
+        current->booking->printStatus();
+        current = current->next;
+    }
+}
+
 void FlightBookingList::remove(int id)
 {
     FlightBookingElement *current = first;
@@ -138,7 +156,6 @@ void FlightBookingList::remove(int id)
     {
         if (current->id == id) {
             if (last != nullptr) last->next = current->next;
-            if (this->last == current) this->last = last;
             if (first == current){
                 if (first->next != nullptr) first = first->next;
                 else first = nullptr;
