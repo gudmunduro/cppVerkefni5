@@ -33,10 +33,12 @@ class FlightBookingList {
 private:
 
     FlightBookingElement *first, *last;
+    FlightBookingElement *getElement(int id);
+    FlightBookingElement *getElementBefore(int id);
 public:
 
     FlightBookingList();
-    void add(int id, FlightBooking *booking);
+    bool add(int id, FlightBooking *booking);
     FlightBooking *get(int id);
     bool has(int id);
     void remove(int id);

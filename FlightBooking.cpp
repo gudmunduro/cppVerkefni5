@@ -51,9 +51,37 @@ FlightBookingList::FlightBookingList()
     last = nullptr;
 }
 
-void FlightBookingList::add(int id, FlightBooking *booking)
+bool FlightBookingList::add(int id, FlightBooking *booking)
 {
+    if (!has(id)) return false;
+
     FlightBookingElement *el = new FlightBookingElement;
+    el->id = id;
+    el->booking = booking;
+
+    if (first == nullptr)
+    {
+        first = el;
+        last = el;
+        return true;
+    }
+    if (first->id > id)
+    {
+        el->next = first;
+        first = el;
+        return true;
+    }
+    if (last->id < id)
+    {
+        last->next = el;
+        last = el;
+        return true;
+    }
+    FlightBookingElement* elBefore = getElementBefore(id);
+    if (elBefore == nullptr) return false;
+    el->next = elBefore->next;
+    elBefore->next = el;
+    /*FlightBookingElement *el = new FlightBookingElement;
     el->id = id;
     el->booking = booking;
     if (first == nullptr)
@@ -64,15 +92,34 @@ void FlightBookingList::add(int id, FlightBooking *booking)
     {
         last->next = el;
     }
-    last = el;
+    last = el;*/
 }
 
 FlightBooking* FlightBookingList::get(int id)
 {
+    if (has(id)) return getElement(id)->booking;
+    return nullptr;
+}
+
+FlightBookingElement *FlightBookingList::getElement(int id)
+{
     FlightBookingElement *current = first;
     while (current != nullptr)
     {
-        if (current->id == id) return current->booking;
+        if (current->id == id) return current;
+        current = current->next;
+    }
+    return nullptr;
+}
+
+FlightBookingElement *FlightBookingList::getElementBefore(int id)
+{
+    FlightBookingElement *current = first;
+    FlightBookingElement *last = nullptr;
+    while (current != nullptr)
+    {
+        if (current->id == id) return last;
+        last = current;
         current = current->next;
     }
     return nullptr;
@@ -80,7 +127,7 @@ FlightBooking* FlightBookingList::get(int id)
 
 bool FlightBookingList::has(int id)
 {
-    return get(id) != nullptr;
+    return getElement(id) != nullptr;
 }
 
 void FlightBookingList::remove(int id)
